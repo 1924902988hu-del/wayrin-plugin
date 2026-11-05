@@ -38,7 +38,14 @@
         ],
         "brandColor": "#7C5CFF",
         "composerIcon": "./assets/icon.png",
-        "logo": "./assets/logo.png"
+        "logo": "./assets/logo.png",
+        "screenshots": [
+          "./listing/screenshots/01-home.png",
+          "./listing/screenshots/02-explore.png",
+          "./listing/screenshots/03-connect.png",
+          "./listing/screenshots/04-work.png",
+          "./listing/screenshots/05-privacy.png"
+        ]
       },
       "review": {
         "test_cases": {

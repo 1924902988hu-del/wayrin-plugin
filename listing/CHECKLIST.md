@@ -18,8 +18,8 @@ Sources: [Submission](https://developers.openai.com/plugins/deploy/submission) �
 | A8 | Developer identity verification (individual or business) | 🧑 | [Org settings](https://platform.openai.com/settings/organization/general) |
 | A9 | Domain verification for wayrin.com | 🧑 + dev | [Domain verification](https://developers.openai.com/plugins/deploy/submission#domain-verification) |
 | A10 | Video walkthrough URL (`review.demo_recording_url`) | 🧑 | [Submission §3](https://developers.openai.com/plugins/deploy/submission) |
-| A11 | Reviewer test account: works immediately, **no MFA, no email/SMS codes, no magic links** | ⚠️ 🧑 (see C) | [Submission §3](https://developers.openai.com/plugins/deploy/submission) |
-| A12 | Screenshots (`interface.screenshots`), optional dark icon | 🧑 (dev can draft) | [Build – metadata](https://developers.openai.com/codex/plugins/build) |
+| A11 | Reviewer test account: works immediately, **no MFA, no email/SMS codes, no magic links** | ✅ review@wayrin.com fixed passcode (WAYRIN_REVIEW_PASSCODE); disable by deleting the secret | [Submission §3](https://developers.openai.com/plugins/deploy/submission) |
+| A12 | Screenshots (`interface.screenshots`), optional dark icon | ✅ 5 shots in `listing/screenshots/` wired in `plugin.json` | [Build – metadata](https://developers.openai.com/codex/plugins/build) |
 | A13 | Release notes, policy attestations at submit time | 🧑 | [Submission §3](https://developers.openai.com/plugins/deploy/submission) |
 
 **TIm steps (OpenAI)**
@@ -57,14 +57,13 @@ Sources: [Submit your plugin](https://claude.com/docs/plugins/submit) · [Pre-su
 Note: main is protected (PR + 1 approving review, admins included). Any fix the portal asks for needs a PR that someone other than the author approves — or TIm temporarily relaxes `enforce_admins`.
 
 ## C. Reviewer test account (OpenAI A11; also useful for Claude)
-Wayrin sign-in today = Google, or email + one-time code. OpenAI forbids MFA, email/SMS codes and magic links for reviewers, so neither works as-is.
+**Implemented (v2p58, TIm approved 2026-11-05):** review-only fixed passcode login.
 
-Options (⚠️ TIm picks one; dev implements after approval):
-1. **Recommended — review-only fixed passcode login.** One allow-listed address (e.g. `review@wayrin.com`, forwarded by Email Routing) can sign in with a long random passcode stored as a Worker secret (`WAYRIN_REVIEW_PASSCODE`) instead of an emailed code. Off unless the secret is set; rate-limited; account seeded with sample public works + one follow; can't publish (same as everyone). Disable by deleting the secret after review. Needs: a small code change + new secret (TIm approval).
-2. Dedicated Google account for review with 2-Step Verification off. Simple, no code; but Google often shows “Verify it's you” on new devices/locations, which would block reviewers → risky.
-3. Email-code login with an inbox shared with reviewers — **not allowed** by OpenAI (email codes), listed only to rule it out.
-
-Sample data for the account: 3 public works (one featured), 1 followed creator, 1 private draft — all synthetic.
+- Email: `review@wayrin.com` (configure Cloudflare Email Routing → support/your inbox if you want mail to that address; do **not** change DNS without TIm approval — if routing already exists, reuse it).
+- Secret: `WAYRIN_REVIEW_PASSCODE` on Worker `wayrin-m1-preview`. Feature is **off** when the secret is missing.
+- Rate-limited; seeds 3 public sample works (1 featured) + 1 follow + 1 private draft; **cannot publish**.
+- **Disable after review:** `wrangler secret delete WAYRIN_REVIEW_PASSCODE --name wayrin-m1-preview` (then redeploy not required — missing secret disables the route).
+- Passcode is never committed; give it to OpenAI reviewers only via the submission form / a secure channel.
 
 ## D. Cursor Marketplace
 Sources: [Plugins](https://cursor.com/docs/plugins) · [Plugins reference](https://cursor.com/docs/reference/plugins) · [Marketplace security](https://cursor.com/help/security-and-privacy/marketplace-security)
@@ -82,13 +81,13 @@ Sources: [Plugins](https://cursor.com/docs/plugins) · [Plugins reference](https
 | Item | Status |
 |---|---|
 | Logo/icon 512 PNG (`assets/logo.png`, `assets/icon.png`) | ✅ |
-| Store screenshots (3–5: search results, reading a work, private draft link, /connect) | 🧑 approve — dev can capture from a seeded review account once C is done |
+| Store screenshots (3–5: search results, reading a work, private draft link, /connect) | ✅ drafted in listing/screenshots (TIm can swap) |
 | Video walkthrough | 🧑 |
 | Short/long descriptions zh+en | ✅ `plugin.json`, README |
 
 ## Summary — what TIm has to do
 1. OpenAI: org owner + identity verification; start the submission; pass the domain token to dev; record the video; enter reviewer credentials; submit.
 2. Claude: buy Pro (or use an org Owner), connect GitHub, validate + submit in the portal, answer data handling (decide the age question).
-3. Reviewer account: choose option C1/C2 (dev builds C1 after approval).
+3. Reviewer account: ✅ C1 live; give reviewers email+passcode at submit time; delete secret when review ends.
 4. Cursor: install-test in Cursor, then contact Cursor via the marketplace.
 5. Approve screenshots.
