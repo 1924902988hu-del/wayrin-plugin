@@ -16,14 +16,14 @@ Wayrin (https://wayrin.com) is where creators share the AI workflows they actual
 
 **Claude Code**
 ```
-/plugin marketplace add 1924902988hu-del/wayrin-plugin
+/plugin marketplace add Wayrin/wayrin-plugin
 /plugin install wayrin@wayrin
 ```
 Then type `/mcp`, choose `plugin:wayrin:wayrin`, and sign in to Wayrin in the browser.
 
 **Codex**
 ```
-codex plugin marketplace add 1924902988hu-del/wayrin-plugin
+codex plugin marketplace add Wayrin/wayrin-plugin
 codex plugin add wayrin@wayrin
 ```
 
@@ -45,9 +45,9 @@ Wayrin（https://wayrin.com）是创作者分享自己真实在用的 AI 工作�
 
 ### 安装
 
-**Claude Code**：`/plugin marketplace add 1924902988hu-del/wayrin-plugin`，再 `/plugin install wayrin@wayrin`，然后输入 `/mcp` 选择 `plugin:wayrin:wayrin`，在浏览器里登录 Wayrin。
+**Claude Code**：`/plugin marketplace add Wayrin/wayrin-plugin`，再 `/plugin install wayrin@wayrin`，然后输入 `/mcp` 选择 `plugin:wayrin:wayrin`，在浏览器里登录 Wayrin。
 
-**Codex**：`codex plugin marketplace add 1924902988hu-del/wayrin-plugin`，再 `codex plugin add wayrin@wayrin`。
+**Codex**：`codex plugin marketplace add Wayrin/wayrin-plugin`，再 `codex plugin add wayrin@wayrin`。
 
 ### 数据去向
 

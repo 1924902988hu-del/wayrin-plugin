@@ -4,7 +4,7 @@
   "description": "Search and reuse AI workflows (skills, rules, agent configs) shared by creators on Wayrin, through the Wayrin MCP server (OAuth).",
   "author": { "name": "Wayrin", "url": "https://wayrin.com" },
   "homepage": "https://wayrin.com/connect",
-  "repository": "https://github.com/1924902988hu-del/wayrin-plugin",
+  "repository": "https://github.com/Wayrin/wayrin-plugin",
   "license": "MIT",
   "keywords": ["wayrin", "mcp", "workflows", "skills"]
 }
