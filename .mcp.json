@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "wayrin": {
+      "type": "http",
+      "url": "https://wayrin.com/mcp"
+    }
+  }
+}

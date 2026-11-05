@@ -1,0 +1,14 @@
+{
+  "name": "wayrin",
+  "description": "Wayrin plugin: search and reuse creators' AI workflows.",
+  "owner": { "name": "Wayrin", "url": "https://wayrin.com" },
+  "plugins": [
+    {
+      "name": "wayrin",
+      "source": "./",
+      "description": "Search and reuse AI workflows shared by creators on Wayrin (MCP, OAuth).",
+      "version": "0.1.0",
+      "category": "productivity"
+    }
+  ]
+}
